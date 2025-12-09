@@ -1,0 +1,27 @@
+
+Filesystems usage for user syacha ( uid 646322396 ):
+-------------------------------------------------------------------------------------
+Directory                       Used   Limit   Used,%         Files     Limit
+-------------------------------------------------------------------------------------
+/home/syacha                    41GB   373GB    10.8%         49776          
+/scratch/syacha                   0B    20TB     0.0%             1          
+
+/shares/atomt.pilot.s3it.uzh    29GB    10TB     0.3%          3609          
+-------------------------------------------------------------------------------------
+
+!! Please note: the scratch filesystem is intended only for temporary storage.
+   Files in /scratch/syacha that have not been accessed in more than 30 days
+   may be automatically deleted.
+
+/home/syacha/data/atmt_2025/avg_checkpoints.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(ckpt_path, map_location="cpu")
+📦 Averaging 7 checkpoints:
+   - cz-en/checkpoints/checkpoint0_7.039.pt
+   - cz-en/checkpoints/checkpoint1_5.792.pt
+   - cz-en/checkpoints/checkpoint2_5.285.pt
+   - cz-en/checkpoints/checkpoint3_5.068.pt
+   - cz-en/checkpoints/checkpoint4_4.691.pt
+   - cz-en/checkpoints/checkpoint5_4.654.pt
+   - cz-en/checkpoints/checkpoint6_4.574.pt
+✅ Averaging complete.
+💾 Saved averaged checkpoint (with args) to: cz-en/checkpoints/checkpoint_avg.pt

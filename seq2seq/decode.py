@@ -11,6 +11,11 @@ def decode(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Te
     PAD = tgt_tokenizer.pad_id()
     generated = torch.full((batch_size, 1), BOS, dtype=torch.long, device=device)
     finished = torch.zeros(batch_size, dtype=torch.bool, device=device)
+    
+    # OPTIMIZATION: Run Encoder ONCE
+    with torch.no_grad():
+        memory = model.encoder(src_tokens, src_pad_mask)
+        
     for t in range(max_out_len):
         # Create target padding mask with correct batch dimension
         max_len = model.decoder.pos_embed.size(1)
@@ -18,8 +23,11 @@ def decode(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Te
             generated = generated[:, :max_len]
         # Ensure trg_pad_mask has shape (batch_size, seq_len)
         trg_pad_mask = (generated == PAD).unsqueeze(1).unsqueeze(2)  # (batch_size, 1, 1, seq_len)
+        
         # Forward pass: use only the generated tokens so far
-        output = model(src_tokens, src_pad_mask, generated, trg_pad_mask).to(device)
+        # OPTIMIZATION: Decode using pre-computed memory
+        output = model.decoder(memory, src_pad_mask,generated,trg_pad_mask).to(device)
+        
         # Get the logits for the last time step
         next_token_logits = output[:, -1, :]  # last time step
         next_tokens = next_token_logits.argmax(dim=-1, keepdim=True)  # greedy
@@ -31,6 +39,7 @@ def decode(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Te
         finished = finished | (next_tokens.squeeze(1) == EOS)
         if finished.all():
             break
+            
     # Remove initial BOS token and anything after EOS
     predicted_tokens = []
     for seq in generated[:, 1:].tolist():
@@ -45,21 +54,32 @@ def beam_search_decode(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_ma
     """Beam Search decoding compatible with Transformer-based Seq2Seq models."""
     model.eval()
     BOS, EOS, PAD = tgt_tokenizer.bos_id(), tgt_tokenizer.eos_id(), tgt_tokenizer.pad_id()
+    
+    # OPTIMIZATION: Run Encoder ONCE
+    with torch.no_grad():
+        memory = model.encoder(src_tokens, src_pad_mask)
+        
     # __QUESTION 1: what does this line set up and why is the beam represented this way?
     beams = [(torch.tensor([[BOS]], device=device), 0.0)]
+    
     for _ in range(max_out_len):
         new_beams = []
         for seq, score in beams:
             if seq[0, -1].item() == EOS:
                 new_beams.append((seq, score))
                 continue
+            
             with torch.no_grad():
                 max_len = model.decoder.pos_embed.size(1)
                 if seq.size(1) > max_len:
                     seq = seq[:, :max_len]
                 # __QUESTION 2: Why do we need to create trg_pad_mask here and how does it affect the model's predictions?
                 trg_pad_mask = (seq == PAD)[:, None, None, :]
-                logits = model(src_tokens, src_pad_mask, seq, trg_pad_mask)[:, -1, :]
+                
+                # OPTIMIZATION: Decode using pre-computed memory
+                output = model.decoder(memory, src_pad_mask, seq, trg_pad_mask)
+                
+                logits = output[:, -1, :]
                 # __QUESTION 3: Explain the purpose of applying log_softmax and selecting top-k tokens here.
                 log_probs = torch.nn.functional.log_softmax(logits, dim=-1)
                 topk_log_probs, topk_ids = log_probs.topk(beam_size, dim=-1)
@@ -74,7 +94,170 @@ def beam_search_decode(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_ma
         # __QUESTION 5: Why do we check for EOS here and what does it imply for beam search?
         if all(seq[0, -1].item() == EOS for seq, _ in beams):
             break
+            
     best_seq, _ = beams[0]
     # __QUESTION 6: What is returned, and why are we squeezing, converting to list and wrapping in another list here?
     return [best_seq.squeeze(0).tolist()]
 
+def compute_score(seq_tensor, log_prob, alpha):
+    if alpha ==0:
+       return log_prob
+    length = seq_tensor.size(1)
+    lp = ((5 + length) ** alpha) / (6 ** alpha)
+    return log_prob / lp
+
+def beam_search_decode_len_pen(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Tensor, max_out_len: int,
+                       tgt_tokenizer: spm.SentencePieceProcessor, args, device: torch.device, beam_size: int = 5, alpha: float = 0.7):
+    """Beam Search decoding compatible with Transformer-based Seq2Seq models."""
+    model.eval()
+    BOS, EOS, PAD = tgt_tokenizer.bos_id(), tgt_tokenizer.eos_id(), tgt_tokenizer.pad_id()
+    
+    # OPTIMIZATION: Run Encoder ONCE
+    with torch.no_grad():
+        memory = model.encoder(src_tokens, src_pad_mask)
+        
+    # __QUESTION 1: what does this line set up and why is the beam represented this way?
+    beams = [(torch.tensor([[BOS]], device=device), 0.0)]
+    
+    for _ in range(max_out_len):
+        new_beams = []
+        for seq, score in beams:
+            if seq[0, -1].item() == EOS:
+                new_beams.append((seq, score))
+                continue
+            
+            with torch.no_grad():
+                max_len = model.decoder.pos_embed.size(1)
+                if seq.size(1) > max_len:
+                    seq = seq[:, :max_len]
+                # __QUESTION 2: Why do we need to create trg_pad_mask here and how does it affect the model's predictions?
+                trg_pad_mask = (seq == PAD)[:, None, None, :]
+                
+                # OPTIMIZATION: Decode using pre-computed memory
+                output = model.decoder(memory, src_pad_mask, seq, trg_pad_mask)
+                
+                logits = output[:, -1, :]
+                # __QUESTION 3: Explain the purpose of applying log_softmax and selecting top-k tokens here.
+                log_probs = torch.nn.functional.log_softmax(logits, dim=-1)
+                topk_log_probs, topk_ids = log_probs.topk(beam_size, dim=-1)
+
+            for k in range(beam_size):
+                # __QUESTION 4: explain the tensor shapes and the logic when creating new_seq and new_score below. Is any broadcasting o>
+                new_seq = torch.cat([seq, topk_ids[:, k].unsqueeze(0)], dim=1)
+                new_score = score + topk_log_probs[:, k].item()
+                new_beams.append((new_seq, new_score))
+
+        beams = sorted(new_beams, key=lambda x: x[1], reverse=True)[:beam_size]
+        # __QUESTION 5: Why do we check for EOS here and what does it imply for beam search?
+        if all(seq[0, -1].item() == EOS for seq, _ in beams):
+            break
+    beams.sort(key=lambda x: compute_score(x[0], x[1], alpha), reverse=True)
+    best_seq, best_score = beams[0]
+    # __QUESTION 6: What is returned, and why are we squeezing, converting to list and wrapping in another list here?
+    return [best_seq.squeeze(0).tolist()]
+def beam_search_decode_relative_pruning(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Tensor, 
+                                        max_out_len: int, tgt_tokenizer: spm.SentencePieceProcessor, 
+                                        args, device: torch.device, beam_size: int = 5, rp: float = 1.2):
+    """
+    Implements Relative Threshold Pruning.
+    Candidates are discarded if score(cand) <= rp * max_score.
+    Since scores are negative (log-probs), rp should be > 1.0 to create a lower threshold.
+    """
+    model.eval()
+    BOS, EOS, PAD = tgt_tokenizer.bos_id(), tgt_tokenizer.eos_id(), tgt_tokenizer.pad_id()
+    
+    with torch.no_grad():
+        memory = model.encoder(src_tokens, src_pad_mask)
+        
+    beams = [(torch.tensor([[BOS]], device=device), 0.0)]
+    
+    for _ in range(max_out_len):
+        new_beams = []
+        for seq, score in beams:
+            if seq[0, -1].item() == EOS:
+                new_beams.append((seq, score))
+                continue
+            
+            with torch.no_grad():
+                max_len = model.decoder.pos_embed.size(1)
+                if seq.size(1) > max_len: seq = seq[:, :max_len]
+                trg_pad_mask = (seq == PAD)[:, None, None, :]
+                
+                output = model.decoder(memory, src_pad_mask, seq, trg_pad_mask)
+                log_probs = torch.nn.functional.log_softmax(output[:, -1, :], dim=-1)
+                topk_log_probs, topk_ids = log_probs.topk(beam_size, dim=-1)
+
+            for k in range(beam_size):
+                new_seq = torch.cat([seq, topk_ids[:, k].unsqueeze(0)], dim=1)
+                new_score = score + topk_log_probs[:, k].item()
+                new_beams.append((new_seq, new_score))
+
+        # 1. Standard Beam Selection (Reduce to Beam Size)
+        beams = sorted(new_beams, key=lambda x: x[1], reverse=True)[:beam_size]
+        
+        # 2. PRUNING STRATEGY: Relative Threshold
+        if beams:
+            max_score = beams[0][1] # Score of the best candidate
+            # Filter: Keep only if score > rp * max_score
+            # Note: Scores are negative. If max is -10 and rp is 1.2, threshold is -12.
+            # We discard if score <= -12.
+            beams = [b for b in beams if b[1] > (rp * max_score)]
+            
+        # Stopping Criterion (All Finished)
+        if not beams or all(seq[0, -1].item() == EOS for seq, _ in beams):
+            break
+            
+    # Handle edge case where pruning removes all (unlikely if rp >= 1)
+    if not beams: return [] 
+    return [beams[0][0].squeeze(0).tolist()]
+def beam_search_decode_absolute_pruning(model: Seq2SeqModel, src_tokens: torch.Tensor, src_pad_mask: torch.Tensor, 
+                                        max_out_len: int, tgt_tokenizer: spm.SentencePieceProcessor, 
+                                        args, device: torch.device, beam_size: int = 5, ap: float = 5.0):
+    """
+    Implements Absolute Threshold Pruning.
+    Candidates are discarded if score(cand) <= max_score - ap.
+    """
+    model.eval()
+    BOS, EOS, PAD = tgt_tokenizer.bos_id(), tgt_tokenizer.eos_id(), tgt_tokenizer.pad_id()
+    
+    with torch.no_grad():
+        memory = model.encoder(src_tokens, src_pad_mask)
+        
+    beams = [(torch.tensor([[BOS]], device=device), 0.0)]
+    
+    for _ in range(max_out_len):
+        new_beams = []
+        for seq, score in beams:
+            if seq[0, -1].item() == EOS:
+                new_beams.append((seq, score))
+                continue
+            
+            with torch.no_grad():
+                max_len = model.decoder.pos_embed.size(1)
+                if seq.size(1) > max_len: seq = seq[:, :max_len]
+                trg_pad_mask = (seq == PAD)[:, None, None, :]
+                
+                output = model.decoder(memory, src_pad_mask, seq, trg_pad_mask)
+                log_probs = torch.nn.functional.log_softmax(output[:, -1, :], dim=-1)
+                topk_log_probs, topk_ids = log_probs.topk(beam_size, dim=-1)
+
+            for k in range(beam_size):
+                new_seq = torch.cat([seq, topk_ids[:, k].unsqueeze(0)], dim=1)
+                new_score = score + topk_log_probs[:, k].item()
+                new_beams.append((new_seq, new_score))
+
+        # 1. Standard Beam Selection
+        beams = sorted(new_beams, key=lambda x: x[1], reverse=True)[:beam_size]
+        
+        # 2. PRUNING STRATEGY: Absolute Threshold
+        if beams:
+            max_score = beams[0][1]
+            # Filter: Keep only if score > max_score - ap
+            threshold = max_score - ap
+            beams = [b for b in beams if b[1] > threshold]
+            
+        if not beams or all(seq[0, -1].item() == EOS for seq, _ in beams):
+            break
+            
+    if not beams: return []
+    return [beams[0][0].squeeze(0).tolist()]

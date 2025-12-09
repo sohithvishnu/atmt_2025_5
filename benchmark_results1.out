@@ -1,0 +1,42 @@
+
+Filesystems usage for user syacha ( uid 646322396 ):
+-------------------------------------------------------------------------------------
+Directory                       Used   Limit   Used,%         Files     Limit
+-------------------------------------------------------------------------------------
+/home/syacha                    41GB   373GB    10.8%         51957          
+/scratch/syacha                   0B    20TB     0.0%             1          
+
+/shares/atomt.pilot.s3it.uzh    39GB    10TB     0.4%          4141          
+-------------------------------------------------------------------------------------
+
+!! Please note: the scratch filesystem is intended only for temporary storage.
+   Files in /scratch/syacha that have not been accessed in more than 30 days
+   may be automatically deleted.
+
+/shares/atomt.pilot.s3it.uzh/groups/vaswani/atmt_2025_version2/benchmark1.py:37: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(args.checkpoint_path,
+Loading model...
+Reading input data...
+Preparing 50 individual sentences...
+
+--- Starting Benchmark on 50 sentences ---
+
+Testing Alpha: 0.0
+  > Avg Time:   0.7054s / sentence
+  > Avg Length: 26.82 tokens
+BLEU score: 8.81
+
+Testing Alpha: 0.3
+  > Avg Time:   0.7005s / sentence
+  > Avg Length: 26.90 tokens
+BLEU score: 8.76
+
+Testing Alpha: 0.7
+  > Avg Time:   0.7009s / sentence
+  > Avg Length: 26.94 tokens
+BLEU score: 8.74
+
+Testing Alpha: 1.0
+  > Avg Time:   0.6987s / sentence
+  > Avg Length: 28.28 tokens
+BLEU score: 8.33

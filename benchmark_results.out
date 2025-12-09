@@ -1,0 +1,37 @@
+
+Filesystems usage for user syacha ( uid 646322396 ):
+-------------------------------------------------------------------------------------
+Directory                       Used   Limit   Used,%         Files     Limit
+-------------------------------------------------------------------------------------
+/home/syacha                    41GB   373GB    10.8%         49782          
+/scratch/syacha                   0B    20TB     0.0%             1          
+
+/shares/atomt.pilot.s3it.uzh    34GB    10TB     0.3%          3994          
+-------------------------------------------------------------------------------------
+
+!! Please note: the scratch filesystem is intended only for temporary storage.
+   Files in /scratch/syacha that have not been accessed in more than 30 days
+   may be automatically deleted.
+
+/home/syacha/data/atmt_2025/benchmark.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(args.checkpoint_path, map_location=lambda s, l: default_restore_location(s, 'cpu'))
+Loading model...
+Reading input data...
+Preparing 50 individual sentences...
+
+--- Starting Benchmark on 50 sentences ---
+
+Testing Beam Size: 1
+  > Original Total Time:  11.0452s (Avg: 0.2209s/sent)
+  > Optimized Total Time: 7.2060s (Avg: 0.1441s/sent)
+  > Speedup:              1.53x FASTER
+
+Testing Beam Size: 3
+  > Original Total Time:  31.9978s (Avg: 0.6400s/sent)
+  > Optimized Total Time: 20.9353s (Avg: 0.4187s/sent)
+  > Speedup:              1.53x FASTER
+
+Testing Beam Size: 5
+  > Original Total Time:  53.2611s (Avg: 1.0652s/sent)
+  > Optimized Total Time: 35.1347s (Avg: 0.7027s/sent)
+  > Speedup:              1.52x FASTER

@@ -1,0 +1,463 @@
+
+Filesystems usage for user syacha ( uid 646322396 ):
+-------------------------------------------------------------------------------------
+Directory                       Used   Limit   Used,%         Files     Limit
+-------------------------------------------------------------------------------------
+/home/syacha                    39GB   373GB    10.4%         49740          
+/scratch/syacha                   0B    20TB     0.0%             1          
+
+/shares/atomt.pilot.s3it.uzh    29GB    10TB     0.3%          3273          
+-------------------------------------------------------------------------------------
+
+!! Please note: the scratch filesystem is intended only for temporary storage.
+   Files in /scratch/syacha that have not been accessed in more than 30 days
+   may be automatically deleted.
+
+Lmod has detected the following error: The following module(s) are unknown:
+"gpu"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "gpu"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+INFO:root:Created combined training file: ./cz-en/tokenizers/joint_train.txt
+sentencepiece_trainer.cc(78) LOG(INFO) Starts training with : 
+trainer_spec {
+  input: ./cz-en/tokenizers/joint_train.txt
+  input_format: 
+  model_prefix: ./cz-en/tokenizers/joint-bpe-8000
+  model_type: BPE
+  vocab_size: 8000
+  self_test_sample_size: 0
+  character_coverage: 1
+  input_sentence_size: 0
+  shuffle_input_sentence: 1
+  seed_sentencepiece_size: 1000000
+  shrinking_factor: 0.75
+  max_sentence_length: 4192
+  num_threads: 16
+  num_sub_iterations: 2
+  max_sentencepiece_length: 16
+  split_by_unicode_script: 1
+  split_by_number: 1
+  split_by_whitespace: 1
+  split_digits: 0
+  pretokenization_delimiter: 
+  treat_whitespace_as_suffix: 0
+  allow_whitespace_only_pieces: 0
+  required_chars: 
+  byte_fallback: 0
+  vocabulary_output_piece_score: 1
+  train_extremely_large_corpus: 0
+  seed_sentencepieces_file: 
+  hard_vocab_limit: 1
+  use_all_vocab: 0
+  unk_id: 0
+  bos_id: 1
+  eos_id: 2
+  pad_id: 3
+  unk_piece: <unk>
+  bos_piece: <s>
+  eos_piece: </s>
+  pad_piece: <pad>
+  unk_surface:  ⁇ 
+  enable_differential_privacy: 0
+  differential_privacy_noise_level: 0
+  differential_privacy_clipping_threshold: 0
+}
+normalizer_spec {
+  name: nmt_nfkc
+  add_dummy_prefix: 1
+  remove_extra_whitespaces: 1
+  escape_whitespaces: 1
+  normalization_rule_tsv: 
+}
+denormalizer_spec {}
+trainer_interface.cc(353) LOG(INFO) SentenceIterator is not specified. Using MultiFileSentenceIterator.
+trainer_interface.cc(185) LOG(INFO) Loading corpus: ./cz-en/tokenizers/joint_train.txt
+trainer_interface.cc(147) LOG(INFO) Loaded 1000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 2000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 3000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 4000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 5000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 6000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 7000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 8000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 9000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 10000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 11000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 12000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 13000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 14000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 15000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 16000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 17000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 18000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 19000000 lines
+trainer_interface.cc(147) LOG(INFO) Loaded 20000000 lines
+trainer_interface.cc(124) LOG(WARNING) Too many sentences are loaded! (20000000), which may slow down training.
+trainer_interface.cc(126) LOG(WARNING) Consider using --input_sentence_size=<size> and --shuffle_input_sentence=true.
+trainer_interface.cc(129) LOG(WARNING) They allow to randomly sample <size> sentences from the entire corpus.
+trainer_interface.cc(409) LOG(INFO) Loaded all 20000000 sentences
+trainer_interface.cc(425) LOG(INFO) Adding meta_piece: <unk>
+trainer_interface.cc(425) LOG(INFO) Adding meta_piece: <s>
+trainer_interface.cc(425) LOG(INFO) Adding meta_piece: </s>
+trainer_interface.cc(425) LOG(INFO) Adding meta_piece: <pad>
+trainer_interface.cc(430) LOG(INFO) Normalizing sentences...
+trainer_interface.cc(539) LOG(INFO) all chars count=1330078409
+trainer_interface.cc(550) LOG(INFO) Done: 100% characters are covered.
+trainer_interface.cc(560) LOG(INFO) Alphabet size=3095
+trainer_interface.cc(561) LOG(INFO) Final character coverage=1
+trainer_interface.cc(592) LOG(INFO) Done! preprocessed 20000000 sentences.
+trainer_interface.cc(598) LOG(INFO) Tokenizing input sentences with whitespace: 20000000
+trainer_interface.cc(609) LOG(INFO) Done! 4771800
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=19795664 min_freq=27217
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=6805925 size=20 all=27844 active=4075 piece=▁d
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=3664624 size=40 all=31017 active=7248 piece=ho
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=2650473 size=60 all=34280 active=10511 piece=ent
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=2102558 size=80 all=37287 active=13518 piece=▁př
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=1575357 size=100 all=40755 active=16986 piece=ení
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=1572818 min_freq=64097
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=1272279 size=120 all=44324 active=5444 piece=▁for
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=1033994 size=140 all=47661 active=8781 piece=ay
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=913685 size=160 all=51302 active=12422 piece=ře
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=789148 size=180 all=55447 active=16567 piece=cí
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=704329 size=200 all=58982 active=20102 piece=▁pod
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=692157 min_freq=40875
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=626726 size=220 all=62618 active=6490 piece=dě
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=574260 size=240 all=67208 active=11080 piece=bo
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=537964 size=260 all=71040 active=14912 piece=out
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=478657 size=280 all=75836 active=19708 piece=▁we
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=439839 size=300 all=80067 active=23939 piece=all
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=434622 min_freq=27092
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=400784 size=320 all=84325 active=7954 piece=▁from
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=370732 size=340 all=88646 active=12275 piece=▁can
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=342345 size=360 all=92347 active=15976 piece=▁vě
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=326447 size=380 all=96443 active=20072 piece=▁ag
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=308814 size=400 all=100353 active=23982 piece=▁en
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=308192 min_freq=19910
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=292375 size=420 all=103380 active=7949 piece=ll
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=273452 size=440 all=107591 active=12160 piece=žit
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=260154 size=460 all=111081 active=15650 piece=ions
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=251636 size=480 all=114154 active=18723 piece=nou
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=237247 size=500 all=117483 active=22052 piece=ated
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=236958 min_freq=15982
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=229736 size=520 all=120127 active=8325 piece=▁Euro
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=219573 size=540 all=123753 active=11951 piece=ely
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=213898 size=560 all=126062 active=14260 piece=▁6
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=206744 size=580 all=130118 active=18316 piece=še
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=196702 size=600 all=133691 active=21889 piece=▁right
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=196067 min_freq=13313
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=189166 size=620 all=136714 active=9672 piece=▁úč
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=183132 size=640 all=138845 active=11803 piece=▁Article
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=176523 size=660 all=142147 active=15105 piece=▁ra
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=172740 size=680 all=145468 active=18426 piece=▁Evrop
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=167858 size=700 all=147678 active=20636 piece=▁všech
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=167788 min_freq=11609
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=163218 size=720 all=151719 active=11397 piece=ite
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=156992 size=740 all=155972 active=15650 piece=▁let
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=152513 size=760 all=159925 active=19603 piece=mí
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=147671 size=780 all=163402 active=23080 piece=▁into
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=144463 size=800 all=166009 active=25687 piece=ody
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=144379 min_freq=9731
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=140775 size=820 all=169009 active=11093 piece=▁mat
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=134518 size=840 all=172707 active=14791 piece=ES
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=131293 size=860 all=175170 active=17254 piece=aci
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=126609 size=880 all=178289 active=20373 piece=dr
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=123582 size=900 all=181592 active=23676 piece=▁our
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=123456 min_freq=8441
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=120164 size=920 all=184606 active=12041 piece=▁ok
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=118197 size=940 all=186455 active=13890 piece=▁em
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=116079 size=960 all=189067 active=16502 piece=bor
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=113515 size=980 all=191446 active=18881 piece=ade
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=111297 size=1000 all=194280 active=21715 piece=▁per
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=111187 min_freq=7631
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=108092 size=1020 all=196721 active=12025 piece=▁say
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=105740 size=1040 all=199577 active=14881 piece=vní
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=102919 size=1060 all=201842 active=17146 piece=▁first
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=100150 size=1080 all=204313 active=19617 piece=nout
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=98339 size=1100 all=207441 active=22745 piece=áme
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=98142 min_freq=6880
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=96712 size=1120 all=210225 active=13005 piece=bu
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=94656 size=1140 all=213381 active=16161 piece=vol
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=91789 size=1160 all=216369 active=19149 piece=ateg
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=89942 size=1180 all=218912 active=21692 piece=rol
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=88419 size=1200 all=221515 active=24295 piece=ilo
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=88248 min_freq=6261
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=86312 size=1220 all=223953 active=13191 piece=▁opatření
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=84531 size=1240 all=226421 active=15659 piece=▁vás
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=82471 size=1260 all=228745 active=17983 piece=ouncil
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=80462 size=1280 all=231161 active=20399 piece=slu
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=79358 size=1300 all=234361 active=23599 piece=tern
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=79351 min_freq=5726
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=78201 size=1320 all=236464 active=13720 piece=cept
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=76615 size=1340 all=238973 active=16229 piece=▁vid
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=75191 size=1360 all=241742 active=18998 piece=▁est
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=74055 size=1380 all=243875 active=21131 piece=▁happ
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=73012 size=1400 all=246527 active=23783 piece=▁too
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=72856 min_freq=5292
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=71848 size=1420 all=248829 active=14611 piece=peč
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=70779 size=1440 all=250574 active=16356 piece=EN
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=69865 size=1460 all=253028 active=18810 piece=ted
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=69134 size=1480 all=255965 active=21747 piece=▁wor
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=68263 size=1500 all=257253 active=23035 piece=abl
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=68253 min_freq=4959
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=67111 size=1520 all=259742 active=15223 piece=▁nap
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=66132 size=1540 all=261711 active=17192 piece=▁stej
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=64996 size=1560 all=264681 active=20162 piece=gu
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=63820 size=1580 all=266795 active=22276 piece=ency
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=62895 size=1600 all=268290 active=23771 piece=dom
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=62862 min_freq=4659
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=62064 size=1620 all=271363 active=16231 piece=▁obchod
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=61532 size=1640 all=273306 active=18174 piece=20
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=60704 size=1660 all=275494 active=20362 piece=stro
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=60117 size=1680 all=277655 active=22523 piece=ovní
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=59173 size=1700 all=279383 active=24251 piece=▁Ju
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=59173 min_freq=4365
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=58182 size=1720 all=281370 active=15842 piece=gg
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=57330 size=1740 all=284118 active=18590 piece=▁roku
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=56672 size=1760 all=285825 active=20297 piece=the
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=56118 size=1780 all=288152 active=22624 piece=teří
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=55457 size=1800 all=289955 active=24427 piece=over
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=55419 min_freq=4100
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=54280 size=1820 all=292029 active=16285 piece=▁bus
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=53744 size=1840 all=293873 active=18129 piece=lid
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=53237 size=1860 all=295966 active=20222 piece=ened
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=52667 size=1880 all=298124 active=22380 piece=rist
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=52083 size=1900 all=300280 active=24536 piece=▁léč
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=51994 min_freq=3900
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=51503 size=1920 all=302123 active=16823 piece=▁vo
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=50896 size=1940 all=303658 active=18358 piece=enou
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=50284 size=1960 all=305366 active=20066 piece=▁tro
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=49354 size=1980 all=307981 active=22681 piece=▁představ
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=48882 size=2000 all=309376 active=24076 piece=▁second
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=48847 min_freq=3710
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=48369 size=2020 all=310702 active=16762 piece=▁Jsem
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=47576 size=2040 all=312764 active=18824 piece=▁hum
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=47133 size=2060 all=314826 active=20886 piece=▁necess
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=46479 size=2080 all=316939 active=22999 piece=mm
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=45800 size=2100 all=318718 active=24778 piece=ávání
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=45731 min_freq=3533
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=45166 size=2120 all=320052 active=17151 piece=anu
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=44802 size=2140 all=322270 active=19369 piece=▁home
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=44230 size=2160 all=324479 active=21578 piece=2,
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=43861 size=2180 all=326411 active=23510 piece=uto
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=43349 size=2200 all=328294 active=25393 piece=ually
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=43335 min_freq=3380
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=42811 size=2220 all=329741 active=17802 piece=▁pís
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=42374 size=2240 all=331303 active=19364 piece=▁přek
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=41954 size=2260 all=333326 active=21387 piece=AN
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=41544 size=2280 all=335144 active=23205 piece=▁web
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=40997 size=2300 all=337930 active=25991 piece=▁norm
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=40982 min_freq=3234
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=40581 size=2320 all=339800 active=18724 piece=▁during
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=40132 size=2340 all=341597 active=20521 piece=▁chce
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=39693 size=2360 all=342869 active=21793 piece=▁means
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=39304 size=2380 all=344210 active=23134 piece=▁curr
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=38877 size=2400 all=345877 active=24801 piece=▁taken
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=38794 min_freq=3113
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=38445 size=2420 all=347512 active=18921 piece=▁období
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=38050 size=2440 all=348621 active=20030 piece=mes
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=37747 size=2460 all=350861 active=22270 piece=ages
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=37491 size=2480 all=352835 active=24244 piece=lej
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=37119 size=2500 all=354858 active=26267 piece=▁uni
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=37081 min_freq=2991
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=36677 size=2520 all=356254 active=19106 piece=ger
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=36362 size=2540 all=357311 active=20163 piece=enz
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=36088 size=2560 all=359401 active=22253 piece=▁Parliament
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=35801 size=2580 all=361385 active=24237 piece=sky
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=35444 size=2600 all=362989 active=25841 piece=▁povol
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=35405 min_freq=2875
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=35043 size=2620 all=364728 active=19821 piece=▁du
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=34699 size=2640 all=367326 active=22419 piece=rus
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=34244 size=2660 all=368935 active=24028 piece=▁Nik
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=33952 size=2680 all=370365 active=25458 piece=▁víc
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=33767 size=2700 all=371346 active=26439 piece=▁zvlášt
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=33731 min_freq=2777
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=33422 size=2720 all=372863 active=20068 piece=isi
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=33167 size=2740 all=373966 active=21171 piece=ither
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=32853 size=2760 all=376104 active=23309 piece=▁součas
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=32609 size=2780 all=377337 active=24542 piece=▁Man
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=32423 size=2800 all=379674 active=26879 piece=▁subjekt
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=32389 min_freq=2676
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=32135 size=2820 all=381228 active=20528 piece=▁kne
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=31895 size=2840 all=382999 active=22299 piece=▁indu
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=31584 size=2860 all=384720 active=24020 piece=sud
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=31397 size=2880 all=386587 active=25887 piece=/9
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=31104 size=2900 all=388700 active=28000 piece=▁abs
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=31102 min_freq=2576
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=30937 size=2920 all=390186 active=20897 piece=▁job
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=30726 size=2940 all=391936 active=22647 piece=▁oh
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=30496 size=2960 all=393398 active=24109 piece=▁ř
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=30255 size=2980 all=396294 active=27005 piece=▁svě
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=30103 size=3000 all=397795 active=28506 piece=▁please
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=30061 min_freq=2475
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=29897 size=3020 all=399325 active=21410 piece=ývá
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=29626 size=3040 all=400461 active=22546 piece=▁nak
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=29411 size=3060 all=402629 active=24714 piece=▁zůst
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=29265 size=3080 all=404451 active=26536 piece=▁few
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=29007 size=3100 all=406185 active=28270 piece=ccess
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=29007 min_freq=2388
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=28769 size=3120 all=407539 active=21609 piece=▁lep
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=28491 size=3140 all=409092 active=23162 piece=ována
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=28236 size=3160 all=410519 active=24589 piece=very
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=28025 size=3180 all=412236 active=26306 piece=níků
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=27851 size=3200 all=414167 active=28237 piece=▁&
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=27851 min_freq=2308
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=27693 size=3220 all=415377 active=21895 piece=▁ním
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=27483 size=3240 all=416932 active=23450 piece=nictvím
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=27307 size=3260 all=417901 active=24419 piece=▁oznám
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=27100 size=3280 all=419452 active=25970 piece=II
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26861 size=3300 all=421512 active=28030 piece=▁proces
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=26851 min_freq=2240
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26677 size=3320 all=423360 active=22882 piece=▁security
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26517 size=3340 all=424961 active=24483 piece=gue
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26309 size=3360 all=426769 active=26291 piece=čku
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26146 size=3380 all=428313 active=27835 piece=ched
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=26010 size=3400 all=429359 active=28881 piece=25
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=25996 min_freq=2172
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=25857 size=3420 all=431263 active=23157 piece=▁someone
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=25586 size=3440 all=432927 active=24821 piece=▁sche
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=25432 size=3460 all=434183 active=26077 piece=▁mohla
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=25270 size=3480 all=435260 active=27154 piece=kám
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=25181 size=3500 all=436435 active=28329 piece=see
+bpe_model_trainer.cc(159INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/train.en: 10000000 sentences, 218798673 tokens, 0.000% <unk> (unk_id=0)
+) LOG(INFO) Updating active symbols. max_freq=25172 min_freq=2112
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24998 size=3520 all=437835 active=23085 piece=▁Děku
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24862 size=3540 all=440156 active=25406 piece=▁heard
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24721 size=3560 all=442251 active=27501 piece=▁nen
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24549 size=3580 all=444032 active=29282 piece=▁able
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24355 size=3600 all=445029 active=30279 piece=ST
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=24347 min_freq=2046
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=24166 size=3620 all=446509 active=23550 piece=▁fung
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23996 size=3640 all=447524 active=24565 piece=řes
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23855 size=3660 all=448932 active=25973 piece=yní
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23702 size=3680 all=450151 active=27192 piece=▁jedna
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23589 size=3700 all=450652 active=27693 piece=angu
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=23582 min_freq=2002
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23456 size=3720 all=452445 active=24168 piece=sequ
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23322 size=3740 all=453611 active=25334 piece=uture
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23200 size=3760 all=454557 active=26280 piece=▁Eng
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=23039 size=3780 all=456137 active=27860 piece=▁zeměděl
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22888 size=3800 all=457745 active=29468 piece=▁krit
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=22886 min_freq=1953
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22767 size=3820 all=459270 active=24389 piece=▁mělo
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22657 size=3840 all=460408 active=25527 piece=oucí
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22460 size=3860 all=461327 active=26446 piece=anou
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22333 size=3880 all=463586 active=28705 piece=▁dovoz
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22209 size=3900 all=464898 active=30017 piece=▁chod
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=22208 min_freq=1897
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=22079 size=3920 all=466119 active=24405 piece=▁method
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21982 size=3940 all=467609 active=25895 piece=ized
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21827 size=3960 all=468975 active=27261 piece=br
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21690 size=3980 all=470388 active=28674 piece=▁písm
+bpe_model_trainer.cc(268) LOG(INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/valid.en: 5000 sentences, 106415 tokens, 0.001% <unk> (unk_id=0)
+INFO) Added: freq=21586 size=4000 all=471672 active=29958 piece=▁dří
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/test.en: 5000 sentences, 87239 tokens, 0.000% <unk> (unk_id=0)
+bpe_model_trainer.ccINFO:root:Data processing complete!
+(159Vocabulary saved to cz-en/tokenizers/cz-bpe-8000.vocab
+Vocabulary saved to cz-en/tokenizers/en-bpe-8000.vocab
+) LOG(INFO) Updating active symbols. max_freq=21583 min_freq=1851
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21453 size=4020 all=473244 active=25135 piece=▁friends
+bpe_model_trainer.cc(268) LOG(INFO Data preprocessing complete.
+) Added: freq=21304 size=4040 all=475403 active=27294 piece=▁soon
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21200 size=4060 all=476413 active=28304 piece=ilar
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=21114 size=4080 all=477674 active=29565 piece=▁politiky
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20974 size=4100 all=478963 active=30854 piece=▁právo
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=20957 min_freq=1802
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20823 size=4120 all=480121 active=25104 piece=more
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20721 size=4140 all=481416 active=26399 piece=▁Modely
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20605 size=4160 all=481891 active=26874 piece=▁Official
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20509 size=4180 all=483379 active=28362 piece=▁soukrom
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20401 size=4200 all=485288 active=30271 piece=▁pret
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=20397 min_freq=1762
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20311 size=4220 all=486780 active=25729 piece=▁Jako
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20217 size=4240 all=487889 active=26838 piece=▁evidence
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20110 size=4260 all=488968 active=27917 piece=▁near
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=20021 size=4280 all=490290 active=29239 piece=▁hran
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19917 size=4300 all=491716 active=30665 piece=▁uv
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=19913 min_freq=1723
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19809 size=4320 all=492720 active=25564 piece=?!
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19702 size=4340 all=494547 active=27391 piece=-2
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19605 size=4360 all=496197 active=29041 piece=▁svým
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19477 size=4380 all=497596 active=30440 piece=▁lab
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19390 size=4400 all=498918 active=31762 piece=▁brat
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=19385 min_freq=1682
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19263 size=4420 all=499892 active=25880 piece=reet
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19137 size=4440 all=500998 active=26986 piece=ender
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=19027 size=4460 all=502658 active=28646 piece=▁budete
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18943 size=4480 all=503397 active=29385 piece=hib
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18825 size=4500 all=504481 active=30469 piece=▁zept
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=18822 min_freq=1647
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18747 size=4520 all=505782 active=26507 piece=ozřejmě
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18645 size=4540 all=507952 active=28677 piece=nutím
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18525 size=4560 all=509346 active=30071 piece=▁Ví
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18443 size=4580 all=510610 active=31335 piece=port
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18345 size=4600 all=512003 active=32728 piece=▁nest
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=18332 min_freq=1606
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18204 size=4620 all=512990 active=26490 piece=cké
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=18083 size=4640 all=514165 active=27665 piece=▁Christ
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17953 size=4660 all=515040 active=28540 piece=▁credit
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17875 size=4680 all=517085 active=30585 piece=▁model
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17752 size=4700 all=517928 active=31428 piece=▁podpor
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=17748 min_freq=1574
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17702 size=4720 all=519505 active=27457 piece=asing
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17580 size=4740 all=520879 active=28831 piece=str
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17468 size=4760 all=522837 active=30789 piece=ováno
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17412 size=4780 all=524444 active=32396 piece=▁doz
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17317 size=4800 all=525881 active=33833 piece=▁started
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=17313 min_freq=1530
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17228 size=4820 all=527190 active=27590 piece=▁competition
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17155 size=4840 all=528194 active=28594 piece=ód
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=17058 size=4860 all=529925 active=30325 piece=aro
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=16940 size=4880 all=531742 active=32142 piece=mít
+bpe_model_trainer.cc(268) LOG(INFO) Added: freq=16861 size=4900 all=532327 active=32727 piece=▁uprav
+bpe_model_trainer.cc(159) LOG(INFO) Updating active symbols. max_freq=16860 min_freq=1497
+trainer_interface.cc(687) LOG(INFO) Saving model: ./cz-en/tokenizers/joint-bpe-8000.model
+trainer_interface.cc(699) LOG(INFO) Saving vocabs: ./cz-en/tokenizers/joint-bpe-8000.vocab
+INFO:root:✅ Trained joint BPE model: ./cz-en/tokenizers/joint-bpe-8000.model
+INFO:root:[JOINT] ids: unk=0 bos=1 eos=2 pad=3
+INFO:root:Loaded shared Joint BPE tokenizer for both source and target languages.
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/train.cz: 10000000 sentences, 234175869 tokens, 0.000% <unk> (unk_id=0)
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/valid.cz: 5000 sentences, 113791 tokens, 0.001% <unk> (unk_id=0)
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/test.cz: 5000 sentences, 92162 tokens, 0.000% <unk> (unk_id=0)
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/train.en: 10000000 sentences, 218798673 tokens, 0.000% <unk> (unk_id=0)
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/valid.en: 5000 sentences, 106415 tokens, 0.001% <unk> (unk_id=0)
+INFO:root:Built a binary dataset for /home/syacha/shares/cz-en/data/raw/test.en: 5000 sentences, 87239 tokens, 0.000% <unk> (unk_id=0)
+INFO:root:Data processing complete!
+Vocabulary saved to cz-en/tokenizers/cz-bpe-8000.vocab
+Vocabulary saved to cz-en/tokenizers/en-bpe-8000.vocab
+ Data preprocessing complete.
+usage: Sequence to Sequence Model [-h] [--cuda] [--data DATA]
+                                  [--source-lang SOURCE_LANG]
+                                  [--target-lang TARGET_LANG] --src-tokenizer
+                                  SRC_TOKENIZER --tgt-tokenizer TGT_TOKENIZER
+                                  [--max-tokens MAX_TOKENS]
+                                  [--batch-size BATCH_SIZE] [--train-on-tiny]
+                                  [--arch {transformer}]
+                                  [--max-epoch MAX_EPOCH]
+                                  [--clip-norm CLIP_NORM] [--lr LR]
+                                  [--patience PATIENCE]
+                                  [--max-length MAX_LENGTH]
+                                  [--log-file LOG_FILE] [--save-dir SAVE_DIR]
+                                  [--restore-file RESTORE_FILE]
+                                  [--save-interval SAVE_INTERVAL] [--no-save]
+                                  [--epoch-checkpoints] [--ignore-checkpoints]
+                                  [--encoder-embed-path ENCODER_EMBED_PATH]
+                                  [--decoder-embed-path DECODER_EMBED_PATH]
+                                  [--encoder-dropout ENCODER_DROPOUT]
+                                  [--decoder-dropout DECODER_DROPOUT]
+                                  [--dim-embedding DIM_EMBEDDING]
+                                  [--attention-heads ATTENTION_HEADS]
+                                  [--dim-feedforward-encoder DIM_FEEDFORWARD_ENCODER]
+                                  [--dim-feedforward-decoder DIM_FEEDFORWARD_DECODER]
+                                  [--max-seq-len MAX_SEQ_LEN]
+                                  [--n-encoder-layers N_ENCODER_LAYERS]
+                                  [--n-decoder-layers N_DECODER_LAYERS]
+Sequence to Sequence Model: error: unrecognized arguments:  
+/var/spool/slurmd/job24611/slurm_script: line 57: --epoch-checkpoints: command not found
